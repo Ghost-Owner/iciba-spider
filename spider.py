@@ -9,7 +9,10 @@ import threading
 def get_word_definition(word, semaphore):
     with semaphore:
         url = f"https://www.iciba.com/{word}"
-        driver = webdriver.Chrome()
+        # Use a headless browser like Chrome in headless mode. It loads much faster without GUI.
+        options = webdriver.ChromeOptions()
+        options.add_argument('headless')
+        driver = webdriver.Chrome(options=options)
         driver.get(url)
 
         # Create an output string, printing that string all at once
@@ -59,8 +62,8 @@ def get_word_definition(word, semaphore):
 
 if __name__ == '__main__':
     # input for test, you can change it as you need
-    words_to_search = ["sexy"]
-    thread_count = 1
+    words_to_search = ["sexy", "test", "dream", "how", "example", "with", "team", "why", "beauty"]
+    thread_count = 4
     semaphore = threading.Semaphore(thread_count)
     # Create and start a thread for each word
     threads = []
