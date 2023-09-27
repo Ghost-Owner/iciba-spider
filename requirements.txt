@@ -1,2 +1,3 @@
 beautifulsoup4==4.12.2
+playwright==1.38.0
 selenium==4.13.0
